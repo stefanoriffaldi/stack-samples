@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %c{1}:%L - %msg%n" />
+		</Console>
+		<File fileName="target/junit/sql.log" append="false" ignoreExceptions="false" name="SqlFile">
+			<PatternLayout pattern="%msg%n"/>
+		</File>
+		<File fileName="target/junit/logs.log" append="false" ignoreExceptions="false" name="SimpleFile">
+			<PatternLayout pattern="%msg%n"/>
+		</File>
+	</Appenders>
+	<Loggers>
+		<!--query che vengono effettuate su DB-->
+		<Logger additivity="false" level="DEBUG" name="org.hibernate.SQL">
+			<AppenderRef ref="SqlFile"/>
+		</Logger>
+		<Logger additivity="false" level="DEBUG" name="org.example">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="SimpleFile" />
+		</Logger>
+		<Root level="INFO">
+			<AppenderRef ref="SimpleFile" />
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
