@@ -16,10 +16,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.allOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -38,17 +39,22 @@ public class FetchTypeTest {
 
         assertThat(universities)
                 .hasSize(2)
-                .extracting("name")
+                .extracting(University::getName)
                 .containsExactly(
                         "Harvard University",
                         "MIT - Massachusetts Institute of Technology"
                 )
         ;
 
+        Iterable<Condition<? super String>> keywords = Stream.of("select", "from", "join", "order by")
+                .map(keyword -> new Condition<String>(o -> o.contains(keyword), keyword))
+                .collect(Collectors.toList());
+
         assertThat(logExtractor.getFormattedMessages().collect(Collectors.toList()))
+                .as("Check query count, expected 1 and only 1")
                 .hasSize(1)
                 .first()
-                .has(containsEach("select", "from", "join", "order by"))
+                .has(allOf(keywords))
         ;
     }
 
@@ -60,19 +66,5 @@ public class FetchTypeTest {
         }
     }
 
-    private Condition<? super String> containsEach(String... strings) {
-        return new Condition<String>("Must contains each of " + Arrays.toString(strings)) {
-            @Override
-            public boolean matches(String content) {
-                String lowerCase = content.toLowerCase();
-                for (String string : strings) {
-                    if (!lowerCase.contains(string.toLowerCase())) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        };
-    }
 }
 
