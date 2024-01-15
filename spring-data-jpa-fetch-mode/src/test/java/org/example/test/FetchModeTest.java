@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -64,6 +65,21 @@ public class FetchModeTest {
         // spring.jpa.properties.hibernate.query.fail_on_pagination_over_collection_fetch property seems not working
         queryTranslator.clear();
         queryTranslator.detach();
+    }
+
+    @Test
+    public void fetchModeManualViaQueryWithExample() {
+        University probe = new University();
+        probe.setAddress("Massachusetts");
+        List<University> universities = repository.findAllFetching(Example.of(probe));
+        assertThat(universities)
+                .hasSize(2)
+                .extracting(University::getName)
+                .containsExactly(
+                        "Harvard University",
+                        "MIT - Massachusetts Institute of Technology"
+                )
+        ;
     }
 
     @Test
