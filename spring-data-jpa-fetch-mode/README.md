@@ -19,7 +19,7 @@ Dependencies:
   - hibernate-entitymanager:5.0.12
 
 To reproduce anomaly:
-- Run unit test org.example.test.FetchTypeTest, it creates sql log 'target/junit/sql.log' that show 3 queries: 1 select for University, 2 select for Student  
+- Run unit test org.example.test.FetchModeTest, it creates sql log 'target/junit/sql.log' that show 3 queries: 1 select for University, 2 select for Student  
 
 Notes:
 - If you use IntelliJ: Remember to manually set JDK 1.8under "Project Settings"."Project"."SDK" or else it should not work properly

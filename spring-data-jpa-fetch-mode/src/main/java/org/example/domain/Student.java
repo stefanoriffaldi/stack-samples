@@ -5,8 +5,6 @@ import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -20,9 +18,6 @@ public class Student {
     private String id;
     private String firstName;
     private String lastName;
-//    @ManyToOne
-//    @JoinColumn(name = "university_id")
-//    private University university;
 
     public Student(String id) {
         this.id = id;

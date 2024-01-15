@@ -29,6 +29,10 @@ public class LogExtractor {
         this((Logger) LoggerFactory.getLogger(name));
     }
 
+    public void clear() {
+        appender.list.clear();
+    }
+
     public Stream<String> getFormattedMessages() {
         return appender.list.stream().map(ILoggingEvent::getFormattedMessage);
     }
