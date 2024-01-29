@@ -1,4 +1,4 @@
-package org.example.test.tools;
+package org.example.tools;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;

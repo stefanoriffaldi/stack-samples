@@ -6,7 +6,7 @@ import org.assertj.core.api.Condition;
 import org.example.SpringBootTestClass;
 import org.example.domain.University;
 import org.example.repository.UniversityRepository;
-import org.example.test.tools.LogExtractor;
+import org.example.tools.LogExtractor;
 import org.hibernate.hql.internal.ast.QueryTranslatorImpl;
 import org.junit.After;
 import org.junit.Before;
