@@ -5,10 +5,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.proxy.HibernateProxy;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -31,6 +28,7 @@ public class University {
     @ToString.Exclude
     @OneToMany/*(fetch = FetchType.EAGER)*/
     @Fetch(FetchMode.JOIN)
+    @OrderBy("lastName")
     private Set<Student> students = new HashSet<>();
 
     public University(String id) {
