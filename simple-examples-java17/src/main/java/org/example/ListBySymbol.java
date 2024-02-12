@@ -17,6 +17,18 @@ public class ListBySymbol {
 
     //    private List<AbstractStock> listBySymbol = new ArrayList<>();
 
+    public static void main(String[] args) {
+        List<Stock> stocks = Arrays.asList(
+                new Stock("ABC"),
+                new Stock("CDE"),
+                new Stock("DEF")
+        );
+        ListBySymbol repository = new ListBySymbol(stocks);
+
+        System.out.println("listBySymbol 'A': " + repository.listBySymbol("A"));
+        System.out.println("listBySymbol 'C': " + repository.listBySymbolWithStream("C"));
+        System.out.println("listBySymbol 'D': " + repository.listBySymbolWithStream("D"));
+    }
 
     public List<Stock> listBySymbol(String symbol) {
         List<Stock> listBySymbol = new ArrayList<>();
@@ -41,18 +53,5 @@ public class ListBySymbol {
         public String toString() {
             return string;
         }
-    }
-
-    public static void main(String[] args) {
-        List<Stock> stocks = Arrays.asList(
-                new Stock("ABC"),
-                new Stock("CDE"),
-                new Stock("DEF")
-        );
-        ListBySymbol repository = new ListBySymbol(stocks);
-
-        System.out.println("listBySymbol 'A': " + repository.listBySymbol("A"));
-        System.out.println("listBySymbol 'C': " + repository.listBySymbolWithStream("C"));
-        System.out.println("listBySymbol 'D': " + repository.listBySymbolWithStream("D"));
     }
 }
