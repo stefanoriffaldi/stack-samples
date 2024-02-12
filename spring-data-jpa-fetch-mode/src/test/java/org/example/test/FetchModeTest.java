@@ -1,9 +1,12 @@
 package org.example.test;
 
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.AbstractListAssert;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
+import org.assertj.core.api.ObjectAssert;
 import org.example.SpringBootTestClass;
+import org.example.domain.Student;
 import org.example.domain.University;
 import org.example.repository.UniversityRepository;
 import org.example.tools.LogExtractor;
@@ -20,6 +23,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -65,6 +70,14 @@ public class FetchModeTest {
         // spring.jpa.properties.hibernate.query.fail_on_pagination_over_collection_fetch property seems not working
         queryTranslator.clear();
         queryTranslator.detach();
+    }
+
+    @Test
+    public void manyToManyOrderByAnnotationTest() {
+        List<Student> students = new ArrayList<>(repository.findOne("20cdd371-2803-4ad6-8c5f-7189d00461e8").getStudents());
+        assertThat(students)
+                .hasOnlyElementsOfType(Student.class)
+                .isSortedAccordingTo(Comparator.comparing(Student::getLastName));
     }
 
     @Test
