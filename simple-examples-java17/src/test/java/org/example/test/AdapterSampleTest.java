@@ -22,7 +22,7 @@ class AdapterSampleTest {
         // Given
         AdapterSample.ToAdapt2 toAdapt2 = new AdapterSample.ToAdapt2();
         // When
-        assertThat(AdapterSample.adapt(toAdapt))
+        assertThat(AdapterSample.adapt(toAdapt2))
                 // Then
                 .isNotNull()
                 .isInstanceOf(AdapterSample.Adapted.class);
