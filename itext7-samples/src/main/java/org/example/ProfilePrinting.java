@@ -28,18 +28,16 @@ public class ProfilePrinting {
 
     @SneakyThrows
     public static void main(String[] args) {
+        List<Profile> profiles = Arrays.asList(Profile.A, Profile.B, Profile.B, Profile.B, null, Profile.C);
         // Create sample empty PDF document with 5 pages
         Path sourcePdfPath = Files.createTempFile("tmp-source-", ".pdf");
         try (
                 OutputStream outputStream = Files.newOutputStream(sourcePdfPath);
                 PdfDocument pdfDocument = new PdfDocument(new PdfWriter(outputStream))
         ) {
-            pdfDocument.addNewPage();
-            pdfDocument.addNewPage();
-            pdfDocument.addNewPage();
-            pdfDocument.addNewPage();
-            pdfDocument.addNewPage();
-            pdfDocument.addNewPage();
+            for (int i = 0; i < profiles.size(); i++) {
+                pdfDocument.addNewPage();
+            }
         }
         // set profile metadata to PDF document
         Path profiledPdfPath = Files.createTempFile("tmp-dest-", ".pdf");
@@ -50,7 +48,7 @@ public class ProfilePrinting {
                 OutputStream outputStream = Files.newOutputStream(profiledPdfPath);
                 Profiler profiler = new ITextProfiler(inputStream, outputStream)
         ) {
-            profiler.setProfiles(Arrays.asList(Profile.A, Profile.B, Profile.B, Profile.B, null, Profile.C));
+            profiler.setProfiles(profiles);
         }
         // printPage PDF document with profiles
         try (
