@@ -3,7 +3,7 @@ package org.example;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Main {
+public class ConversionMap {
     public static void main(String[] args) {
         Map<String, String> forConversion = Map.of(
             "$", "s",
