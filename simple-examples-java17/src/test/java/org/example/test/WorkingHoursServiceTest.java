@@ -74,8 +74,8 @@ class WorkingHoursServiceTest {
         LocalDateTime result = service.addWorkingDays(start, workDays);
         // Then
         assertThat(result)
-                .isEqualTo(LocalDateTime.of(2024, 4, 5, 8, 0))
-                .is(dayOfTheWeek(FRIDAY));
+                .isEqualTo(LocalDateTime.of(2024, 4, 4, 16, 0))
+                .is(dayOfTheWeek(THURSDAY));
     }
 
     @Test

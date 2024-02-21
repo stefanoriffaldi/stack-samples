@@ -57,7 +57,10 @@ public class WorkingHoursService {
             plussed = plussed.plusDays(1);
         }
         if (plussed.toLocalTime().equals(workdayStart)) {
-            plussed = LocalDateTime.of(plussed.minusDays(1).toLocalDate(), workdayEnd);
+            do {
+                plussed = plussed.minusDays(1);
+            } while (isWeekend(plussed.toLocalDate()) || isHoliday(plussed.toLocalDate()));
+            plussed = LocalDateTime.of(plussed.toLocalDate(), workdayEnd);
         }
         return plussed;
     }
